@@ -41,11 +41,11 @@ app.post('/login', function (req, res) {
         
         else if(!err && results.length>0){
             req.session.username = results[0].firstname;
-        res.send({ message: 'Welcome '+req.session.username });
+        res.json({ 'message': 'Welcome  '+req.session.username });
         }
         
         else{
-         res.send({ message: 'There seems to be an issue with the username/password combination that you entered' });
+         res.json({ 'message': 'There seems to be an issue with the username/password combination that you entered' });
         }   
         
     });
@@ -56,14 +56,14 @@ app.post('/login', function (req, res) {
 app.post('/add', function (req, res) {
     
     if(req.session.username == null || req.session.username === 'undefined'){
-       res.send({ message: 'You are not currently logged in' });
+       res.json({ 'message': 'You are not currently logged in' });
         } 
    else if(isNaN(Number(req.body.num1)) || isNaN(Number(req.body.num2)) || !(req.body.num1) || !(req.body.num2)){
-      res.send({ message: 'The numbers you entered are not valid' });
+      res.json({ 'message': 'The numbers you entered are not valid' });
         }
     else{
         var result = Number(req.body.num1)+Number(req.body.num2)
-        res.send({ message: 'The action was successful, result: '+ result });
+        res.json({ 'message': 'The action was successful, result: '+ result });
         }
 });
 
@@ -71,14 +71,14 @@ app.post('/add', function (req, res) {
 app.post('/multiply', function (req, res) {
     
     if(req.session.username == null || req.session.username === 'undefined'){
-       res.send({ message: 'You are not currently logged in' });
+       res.json({ 'message': 'You are not currently logged in' });
         } 
    else if(isNaN(Number(req.body.num1)) || isNaN(Number(req.body.num2)) || !(req.body.num1) || !(req.body.num2)){
-      res.send({ message: 'The numbers you entered are not valid' });
+      res.json({ 'message': 'The numbers you entered are not valid' });
         }
     else{
         var result = Number(req.body.num1)*Number(req.body.num2)
-        res.send({ message: 'The action was successful, result: '+ result });
+        res.json({ 'message': 'The action was successful, result: '+ result });
         }
 });
  
@@ -86,25 +86,25 @@ app.post('/multiply', function (req, res) {
 app.post('/divide', function (req, res) {
     
     if(req.session.username == null || req.session.username === 'undefined'){
-       res.send({ message: 'You are not currently logged in' });
+       res.json({ 'message': 'You are not currently logged in' });
         } 
    else if(isNaN(Number(req.body.num1)) || isNaN(Number(req.body.num2)) || !(req.body.num1) || !(req.body.num2) || 0 == Number(req.body.num2)){
-      res.send({ message: 'The numbers you entered are not valid' });
+      res.json({ 'message': 'The numbers you entered are not valid' });
         }
     else{
         var result = Number(req.body.num1)/Number(req.body.num2)
-        res.send({ message: 'The action was successful, result: '+ result });
+        res.json({ 'message': 'The action was successful, result: '+ result });
         }
 });
 
 // Logout function
 app.post('/logout', function (req, res) {
     if(req.session.username == null || req.session.username === 'undefined'){
-       res.send({ message: 'You are not currently logged in' });
+       res.json({ 'message': 'You are not currently logged in' });
         } 
     
     else{
-        res.send({ message: 'You have been successfully logged out' });
+        res.json({ 'message': 'You have been successfully logged out' });
         req.session.destroy();
     }
     
