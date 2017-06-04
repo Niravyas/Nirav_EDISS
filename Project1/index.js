@@ -63,7 +63,7 @@ app.post('/add', function (req, res) {
         }
     else{
         var result = Number(req.body.num1)+Number(req.body.num2)
-        res.json({'message': 'The action was successful', 'result': 'result'});
+        res.json({'message': 'The action was successful', 'result': result});
         }
 });
 
@@ -78,7 +78,7 @@ app.post('/multiply', function (req, res) {
         }
     else{
         var result = Number(req.body.num1)*Number(req.body.num2)
-        res.json({  'message': 'The action was successful', 'result': 'result'});
+        res.json({  'message': 'The action was successful', 'result': result});
         }
 });
  
@@ -93,7 +93,7 @@ app.post('/divide', function (req, res) {
         }
     else{
         var result = Number(req.body.num1)/Number(req.body.num2)
-        res.json({ 'message': 'The action was successful', 'result': 'result' });
+        res.json({ 'message': 'The action was successful', 'result': result });
         }
 });
 
