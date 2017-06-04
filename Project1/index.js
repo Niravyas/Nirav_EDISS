@@ -8,7 +8,7 @@ const session = require('express-session');
 app.use(session({
 secret: 'random',
 saveUninitialized: true,
-cookie: {maxAge: 30000},
+cookie: {maxAge: 900000},
 rolling: true,
 resave:true }));
  
@@ -112,8 +112,8 @@ app.post('/logout', function (req, res) {
  
  
 // port must be set to 8080 because incoming http requests are routed from port 80 to port 8080
-app.listen(8080, function () {
-    console.log('Node app is running on port 8080');
+app.listen(3000, function () {
+    console.log('niravkav Project 1 app is running on port 3000');
 });
  
 
