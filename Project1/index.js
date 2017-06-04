@@ -41,7 +41,7 @@ app.post('/login', function (req, res) {
         
         else if(!err && results.length>0){
             req.session.username = results[0].firstname;
-        res.json({ 'message': 'Welcome  '+req.session.username });
+        res.json({ 'message':'Welcome '+req.session.username });
         }
         
         else{
