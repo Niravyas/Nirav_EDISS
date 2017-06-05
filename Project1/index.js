@@ -8,7 +8,7 @@ const session = require('express-session');
 app.use(session({
 secret: 'random',
 saveUninitialized: true,
-cookie: {maxAge: 60000},
+cookie: {maxAge: 900000},
 rolling: true,
 resave:true }));
  
