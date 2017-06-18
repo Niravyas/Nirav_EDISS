@@ -1,0 +1,18 @@
+{"username":"niravyas", 
+"password":"niravyas"
+}
+
+{"fname": "Nirav", 
+"lname": "Vyas",
+"address": "Cnetre Ave",
+"city": "Pitt",
+"state": "PA",
+"zip": "15206",
+"email": "email",
+"username":"niravyas",
+"password": "niravyas"}
+
+{"asin": "5001",
+ "productname":"abcprod",
+ "productdescription": "myprod",
+ "group": "Toy"}
