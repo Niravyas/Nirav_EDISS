@@ -2,7 +2,7 @@
   "config": {
     "target": "http://localhost:3000",
     "phases": [
-      {"duration": 10, "arrivalCount": 10}
+      {"duration": 1, "arrivalCount": 1}
     ],
     "payload": [
     {
@@ -65,6 +65,14 @@
          }
         }
       },
+           {"post": {
+         "url": "/viewUsers",
+         "match":{
+           "json":"$.message",
+           "value":"The action was successful"
+         }
+        }
+      },
       {"post": {
         "url": "/addProducts",
         "json": {"asin":"{{{asin}}}", "productName":"{{productName}}", "productDescription":"{{{productDescription}}}","group":"{{{group}}}"},
@@ -82,6 +90,15 @@
          "value":"Sound of Music was successfully updated"
        }
       }
+    },
+          {"post": {
+      "url": "/viewProducts",
+      "json": {"keyword":"Sound", "group":"{{group}}"},
+      "match":{
+        "json":"$.product[*].productName",
+        "value":"Sound of Music"
+      }
+     }
     }
           
      ]
