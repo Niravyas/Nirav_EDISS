@@ -1,8 +1,8 @@
 {
   "config": {
-    "target": "http://localhost:3000",
+    "target": "http://ec2-52-87-42-51.compute-1.amazonaws.com:3000",
     "phases": [
-      {"duration": 10, "arrivalCount": 100}
+      {"duration": 5, "arrivalCount": 10}
     ],
     "payload": [
     {

@@ -17,9 +17,9 @@ app.use(bodyParser.urlencoded({
 }));    
 
 const dbconnect = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
+    host: 'ec2-52-87-42-51.compute-1.amazonaws.com',
+    user: 'niravyas_ediss',
+    password: 'edissrox',
     database: 'EDISS'
 });
 
