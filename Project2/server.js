@@ -284,7 +284,7 @@ app.post('/viewProducts', function (req, res) {
          query1 = query1.concat("' and");
     }
     if(req.body.asin || req.body.keyword || req.body.group){
-            qquery1 = query1.substring(0, query1.length - 3);
+            query1 = query1.substring(0, query1.length - 3);
         }
     
     console.log(query1);
