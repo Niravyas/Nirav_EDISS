@@ -249,7 +249,7 @@ app.post('/viewUsers', function (req, res) {
 app.post('/viewProducts', function (req, res) {
     
 
-        var query1 = "SELECT `asin`, `productName` from `products` and"
+        var query1 = "SELECT `asin`, `productName` from `products`"
         
         if(req.body.asin || req.body.keyword || req .body.group){
             query1 = query1.concat("  where");
@@ -283,8 +283,10 @@ app.post('/viewProducts', function (req, res) {
         query1 = query1.concat(req.body.group);
          query1 = query1.concat("' and");
     }
+    if(req.body.asin || req.body.keyword || req .body.group){
+            qquery1 = query1.substring(0, query1.length - 3);
+        }
     
-    query1 = query1.substring(0, query1.length - 3);
     console.log(query1);
     dbconnect.query(query1, function (err, results, fields) {
                     if (err) dbconnect.end;
