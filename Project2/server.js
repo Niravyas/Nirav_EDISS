@@ -247,6 +247,7 @@ app.post('/viewUsers', function (req, res) {
 
 
 app.post('/viewProducts', function (req, res) {
+    
 
         var query1 = "SELECT `asin`, `productName` from `products`"
         
@@ -257,14 +258,11 @@ app.post('/viewProducts', function (req, res) {
         if(req.body.asin){
             query1 = query1.concat("  `asin` = '");
             query1 = query1.concat(req.body.asin);
-            query1 = query1.concat("' ");
+            query1 = query1.concat("' and");
             
             
         }
-    
-    if(req.body.asin && req.body.keyword){
-        query1 = query1.concat("  and");
-    }
+   
     if(req.body.keyword){
             query1 = query1.concat(" (`productName` like '");
             query1 = query1.concat("%");
@@ -275,18 +273,18 @@ app.post('/viewProducts', function (req, res) {
             query1 = query1.concat("%");
             query1 = query1.concat(req.body.keyword);
             query1 = query1.concat("%");
-            query1 = query1.concat("')");
+            query1 = query1.concat("') and");
             
         }
     
-     if((req.body.asin && req.body.group) || (req.body.keyword && req.body.group)){
-         query1 = query1.concat("  and");
-     }
+     
     if(req.body.group){
         query1 = query1.concat(" `group`='");
         query1 = query1.concat(req.body.group);
-         query1 = query1.concat("'");
+         query1 = query1.concat("' and");
     }
+    
+    query1 = query1.substring(0, query1.length - 3);
     console.log(query1);
     dbconnect.query(query1, function (err, results, fields) {
                     if (err) dbconnect.end;
