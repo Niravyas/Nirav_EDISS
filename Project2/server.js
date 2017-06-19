@@ -251,6 +251,19 @@ app.post('/viewProducts', function (req, res) {
 
         var query1 = "SELECT `asin`, `productName` from `products`"
         
+        if(!req.body.asin && !req.body.keyword && !req .body.group){
+            dbconnect.query(query1, function (err, results, fields) {
+                    if (err) dbconnect.end;
+                    else if(results.length == 0){
+                        res.json({ 'message': 'There are no products that match that criteria' });
+                    }
+                    else{
+                        res.json({ 'message': 'The action was successful', 'product':results});
+                    }
+                     });
+        }
+        
+        
         if(req.body.asin || req.body.keyword || req .body.group){
             query1 = query1.concat("  where");
         }
@@ -258,9 +271,7 @@ app.post('/viewProducts', function (req, res) {
         if(req.body.asin){
             query1 = query1.concat("  `asin` = '");
             query1 = query1.concat(req.body.asin);
-            query1 = query1.concat("' and");
-            
-            
+            query1 = query1.concat("' and");       
         }
    
     if(req.body.keyword){
