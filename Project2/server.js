@@ -249,7 +249,7 @@ app.post('/viewUsers', function (req, res) {
 app.post('/viewProducts', function (req, res) {
     
 
-        var query1 = "SELECT `asin`, `productName` from `products and`"
+        var query1 = "SELECT `asin`, `productName` from `products` and"
         
         if(req.body.asin || req.body.keyword || req .body.group){
             query1 = query1.concat("  where");
