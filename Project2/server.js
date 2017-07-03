@@ -455,9 +455,9 @@ app.post('/updateInfo', function (req, res) {
   });
 
  
-// port must 3000
-app.listen(3000, function () {
-    console.log('niravkav Project 2 app is running on port 3000');
+// port must 8080
+app.listen(8080, function () {
+    console.log('niravkav Project 2 app is running on port 8080');
 });
  
 
