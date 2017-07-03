@@ -1,8 +1,8 @@
 {
   "config": {
-    "target": "http://ec2-52-87-42-51.compute-1.amazonaws.com:3000",
+    "target": "http://ec2-54-89-200-148.compute-1.amazonaws.com:3000",
     "phases": [
-      {"duration": 5, "arrivalCount": 100}
+      {"duration": 50, "arrivalCount": 1}
     ],
     "payload": [
     {

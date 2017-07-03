@@ -1,9 +1,11 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const mysql = require('mysql');
-const session = require('express-session');
+const session = require('cookie-session');
 
+app.use(cookieParser);
 app.use(session({
 secret: 'project2',
 saveUninitialized: true,
@@ -12,6 +14,7 @@ rolling: true,
 resave:true }));
 
 app.use(bodyParser.json());
+
 app.use(bodyParser.urlencoded({
     extended: true
 }));    
