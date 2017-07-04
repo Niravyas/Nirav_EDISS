@@ -7,14 +7,15 @@ var client  = redis.createClient();
 const app = express();
 const mysql = require('mysql');
 //const cookieParser = require('cookie-parser');
+var client = redis.createClient(6379, 'redis-cluster.3cxu5o.ng.0001.use1.cache.amazonaws.com', {no_ready_check: true});
 
-
-
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 //app.use(cookieParser);
 app.use(session({
 secret: 'project2',
 saveUninitialized: true,
-store: new redisStore({ host: 'ediss-cluster.3cxu5o.clustercfg.use1.cache.amazonaws.com', port: 6379, client: client,ttl :  260}),
+store: new redisStore({ host: 'redis-cluster.3cxu5o.ng.0001.use1.cache.amazonaws.com', port: 6379, client: client,ttl :  260}),
 cookie: {maxAge: 900000},
 rolling: true,
 resave:true }));
