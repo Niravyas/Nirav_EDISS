@@ -1,14 +1,20 @@
 const express = require('express');
-const app = express();
+var redis   = require("redis");
+const session = require('express-session');
+var redisStore = require('connect-redis')(session);
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
+var client  = redis.createClient();
+const app = express();
 const mysql = require('mysql');
-const session = require('cookie-session');
+//const cookieParser = require('cookie-parser');
 
-app.use(cookieParser);
+
+
+//app.use(cookieParser);
 app.use(session({
 secret: 'project2',
 saveUninitialized: true,
+store: new redisStore({ host: 'ediss-cluster.3cxu5o.clustercfg.use1.cache.amazonaws.com', port: 6379, client: client,ttl :  260}),
 cookie: {maxAge: 900000},
 rolling: true,
 resave:true }));
