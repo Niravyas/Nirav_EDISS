@@ -1,0 +1,118 @@
+{
+  "aggregate": {
+    "timestamp": "2017-07-04T01:32:31.483Z",
+    "scenariosCreated": 1,
+    "scenariosCompleted": 0,
+    "requestsCompleted": 1,
+    "latency": {
+      "min": 60.8,
+      "max": 60.8,
+      "median": 60.8,
+      "p95": null,
+      "p99": null
+    },
+    "rps": {
+      "count": 1,
+      "mean": 2.08
+    },
+    "scenarioDuration": {
+      "min": null,
+      "max": null,
+      "median": null,
+      "p95": null,
+      "p99": null
+    },
+    "scenarioCounts": {
+      "login not registered": 1
+    },
+    "errors": {},
+    "codes": {
+      "200": 1
+    },
+    "matches": 0,
+    "customStats": {},
+    "phases": [
+      {
+        "duration": 10,
+        "arrivalCount": 1
+      }
+    ]
+  },
+  "intermediate": [
+    {
+      "timestamp": "2017-07-04T01:32:23.249Z",
+      "scenariosCreated": 0,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 0,
+      "latency": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 0,
+        "mean": null
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {},
+      "errors": {},
+      "codes": {},
+      "matches": 0,
+      "latencies": [],
+      "customStats": {},
+      "concurrency": 0,
+      "pendingRequests": 0
+    },
+    {
+      "timestamp": "2017-07-04T01:32:31.475Z",
+      "scenariosCreated": 1,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 1,
+      "latency": {
+        "min": 60.8,
+        "max": 60.8,
+        "median": 60.8,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 1,
+        "mean": 2.13
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {
+        "login not registered": 1
+      },
+      "errors": {},
+      "codes": {
+        "200": 1
+      },
+      "matches": 0,
+      "latencies": [
+        [
+          1499131951067,
+          "4f82ccf0-ce5d-4f74-8a5a-71079e00a73a",
+          60828111,
+          200
+        ]
+      ],
+      "customStats": {},
+      "concurrency": 1,
+      "pendingRequests": 0
+    }
+  ]
+}

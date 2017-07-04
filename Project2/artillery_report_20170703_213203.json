@@ -1,0 +1,154 @@
+{
+  "aggregate": {
+    "timestamp": "2017-07-04T01:33:07.334Z",
+    "scenariosCreated": 1,
+    "scenariosCompleted": 0,
+    "requestsCompleted": 7,
+    "latency": {
+      "min": 21.6,
+      "max": 57.6,
+      "median": 22.4,
+      "p95": null,
+      "p99": null
+    },
+    "rps": {
+      "count": 7,
+      "mean": 7.14
+    },
+    "scenarioDuration": {
+      "min": null,
+      "max": null,
+      "median": null,
+      "p95": null,
+      "p99": null
+    },
+    "scenarioCounts": {
+      "login not registered": 1
+    },
+    "errors": {},
+    "codes": {
+      "200": 7
+    },
+    "matches": 6,
+    "customStats": {},
+    "phases": [
+      {
+        "duration": 10,
+        "arrivalCount": 1
+      }
+    ]
+  },
+  "intermediate": [
+    {
+      "timestamp": "2017-07-04T01:33:04.339Z",
+      "scenariosCreated": 0,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 0,
+      "latency": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 0,
+        "mean": null
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {},
+      "errors": {},
+      "codes": {},
+      "matches": 0,
+      "latencies": [],
+      "customStats": {},
+      "concurrency": 0,
+      "pendingRequests": 0
+    },
+    {
+      "timestamp": "2017-07-04T01:33:07.325Z",
+      "scenariosCreated": 1,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 7,
+      "latency": {
+        "min": 21.6,
+        "max": 57.6,
+        "median": 22.4,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 7,
+        "mean": 7.14
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {
+        "login not registered": 1
+      },
+      "errors": {},
+      "codes": {
+        "200": 7
+      },
+      "matches": 6,
+      "latencies": [
+        [
+          1499131986410,
+          "c4774875-2949-432d-bcf0-add595b94455",
+          57552180,
+          200
+        ],
+        [
+          1499131986542,
+          "c4774875-2949-432d-bcf0-add595b94455",
+          32628298,
+          200
+        ],
+        [
+          1499131986626,
+          "c4774875-2949-432d-bcf0-add595b94455",
+          22217888,
+          200
+        ],
+        [
+          1499131986711,
+          "c4774875-2949-432d-bcf0-add595b94455",
+          21595425,
+          200
+        ],
+        [
+          1499131986801,
+          "c4774875-2949-432d-bcf0-add595b94455",
+          22933932,
+          200
+        ],
+        [
+          1499131986887,
+          "c4774875-2949-432d-bcf0-add595b94455",
+          22421956,
+          200
+        ],
+        [
+          1499131986974,
+          "c4774875-2949-432d-bcf0-add595b94455",
+          22373655,
+          200
+        ]
+      ],
+      "customStats": {},
+      "concurrency": 1,
+      "pendingRequests": 0
+    }
+  ]
+}

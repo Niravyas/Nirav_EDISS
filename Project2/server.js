@@ -108,8 +108,9 @@ app.post('/addProducts', function (req, res) {
         //check whether user is an admin
         dbconnect.query('SELECT * FROM admins where username=?', req.session.username, function (err1, results1, fields1) {
         if (err1) dbconnect.end;
-        
-        else if(!err1 && results1.length>0){
+        //console.log("Coming here"+req.session.username);
+        else if(results1.length>0){
+           // console.log("Coming here2"+req.session.username+" "+results1.length);
            //add product if not a duplicate
             var parameters  = [req.body.asin, req.body.productName, req.body.productDescription, req.body.group]
              dbconnect.query('INSERT INTO products (`asin`, `productname`, `productdescription`, `group`) VALUES (?, ?, ?, ?)', parameters, function (err3, results3, fields3) {

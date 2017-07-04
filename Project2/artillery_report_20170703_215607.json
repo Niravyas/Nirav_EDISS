@@ -1,0 +1,158 @@
+{
+  "aggregate": {
+    "timestamp": "2017-07-04T01:56:55.652Z",
+    "scenariosCreated": 1,
+    "scenariosCompleted": 1,
+    "requestsCompleted": 13,
+    "latency": {
+      "min": 19.7,
+      "max": 81.5,
+      "median": 24.2,
+      "p95": 79.7,
+      "p99": null
+    },
+    "rps": {
+      "count": 13,
+      "mean": 8.78
+    },
+    "scenarioDuration": {
+      "min": 1342,
+      "max": 1342,
+      "median": 1342,
+      "p95": null,
+      "p99": null
+    },
+    "scenarioCounts": {
+      "login not registered": 1
+    },
+    "errors": {},
+    "codes": {
+      "200": 13
+    },
+    "matches": 13,
+    "customStats": {},
+    "phases": [
+      {
+        "duration": 1,
+        "arrivalCount": 1
+      }
+    ]
+  },
+  "intermediate": [
+    {
+      "timestamp": "2017-07-04T01:56:55.647Z",
+      "scenariosCreated": 1,
+      "scenariosCompleted": 1,
+      "requestsCompleted": 13,
+      "latency": {
+        "min": 19.7,
+        "max": 81.5,
+        "median": 24.2,
+        "p95": 79.7,
+        "p99": null
+      },
+      "rps": {
+        "count": 13,
+        "mean": 8.78
+      },
+      "scenarioDuration": {
+        "min": 1342,
+        "max": 1342,
+        "median": 1342,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {
+        "login not registered": 1
+      },
+      "errors": {},
+      "codes": {
+        "200": 13
+      },
+      "matches": 13,
+      "latencies": [
+        [
+          1499133414253,
+          "cdbb208c-cbe5-47e3-8b47-8724142be882",
+          81478070,
+          200
+        ],
+        [
+          1499133414369,
+          "cdbb208c-cbe5-47e3-8b47-8724142be882",
+          27400453,
+          200
+        ],
+        [
+          1499133414463,
+          "cdbb208c-cbe5-47e3-8b47-8724142be882",
+          30494052,
+          200
+        ],
+        [
+          1499133414549,
+          "cdbb208c-cbe5-47e3-8b47-8724142be882",
+          23071587,
+          200
+        ],
+        [
+          1499133414635,
+          "cdbb208c-cbe5-47e3-8b47-8724142be882",
+          24233196,
+          200
+        ],
+        [
+          1499133414718,
+          "cdbb208c-cbe5-47e3-8b47-8724142be882",
+          20416308,
+          200
+        ],
+        [
+          1499133414803,
+          "cdbb208c-cbe5-47e3-8b47-8724142be882",
+          21453545,
+          200
+        ],
+        [
+          1499133414895,
+          "cdbb208c-cbe5-47e3-8b47-8724142be882",
+          27691459,
+          200
+        ],
+        [
+          1499133415030,
+          "cdbb208c-cbe5-47e3-8b47-8724142be882",
+          69706814,
+          200
+        ],
+        [
+          1499133415139,
+          "cdbb208c-cbe5-47e3-8b47-8724142be882",
+          44633202,
+          200
+        ],
+        [
+          1499133415227,
+          "cdbb208c-cbe5-47e3-8b47-8724142be882",
+          21352719,
+          200
+        ],
+        [
+          1499133415313,
+          "cdbb208c-cbe5-47e3-8b47-8724142be882",
+          20650561,
+          200
+        ],
+        [
+          1499133415401,
+          "cdbb208c-cbe5-47e3-8b47-8724142be882",
+          19737092,
+          200
+        ]
+      ],
+      "customStats": {},
+      "concurrency": 1,
+      "pendingRequests": 1
+    }
+  ]
+}
