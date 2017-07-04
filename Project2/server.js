@@ -1,5 +1,5 @@
 const express = require('express');
-var redis   = require("redis");
+var redis   = require('redis');
 const session = require('express-session');
 var redisStore = require('connect-redis')(session);
 const bodyParser = require('body-parser');
