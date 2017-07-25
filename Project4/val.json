@@ -1,0 +1,30 @@
+{"username":"niravyas", 
+"password":"niravyas"
+}
+{"username":"AAI30WPT5JP", 
+"password":"IIV70SHM5IVZDS"
+}
+{"username": "AAI30WPT5JP"}
+
+{"products": [{"asin": "0002192047"}, {"asin": "000220035X"}]}
+
+{"fname": "Nirav", 
+"lname": "Vyas",
+"address": "Cnetre Ave",
+"city": "Pitt",
+"state": "PA",
+"zip": "15206",
+"email": "email",
+"username":"niravyas",
+"password": "niravyas"}
+
+{"asin": "5001",
+ "productname":"abcprod",
+ "productdescription": "myprod",
+ "group": "Toy"}
+
+{"fname":"niravyas", 
+"lname":"niravyas"
+}
+
+{"asin": "0002192047"}
