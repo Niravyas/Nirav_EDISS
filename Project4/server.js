@@ -624,9 +624,9 @@ app.post('/getRecommendations', function (req, res) {
 });
 
 
-// port must 8080
-app.listen(8080, function () {
-    console.log('niravkav Project 2 app is running on port 8080');
+// port must 4000
+app.listen(4000, function () {
+    console.log('niravkav Project 2 app is running on port 4000');
 });
  
 
