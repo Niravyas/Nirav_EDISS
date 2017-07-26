@@ -625,7 +625,7 @@ app.post('/getRecommendations', function (req, res) {
 
 
 // port must 4000
-app.listen(4000, function () {
+app.listen(5000, function () {
     console.log('niravkav Project 2 app is running on port 4000');
 });
  
