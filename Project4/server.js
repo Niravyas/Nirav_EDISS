@@ -499,7 +499,7 @@ app.post('/buyProducts', function (req, res) {
          else{
               if(results[0].isAsinValid == 0)  {
                   //return result that asin has not been object 
-                  return res.json({ 'message': 'You are not currently logged in' });
+                  return res.json({ 'message': 'There are no products that match that criteria' });
               }
         else if(results[0].isAsinValid == 1){
            //values are present,add into db
