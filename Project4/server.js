@@ -28,21 +28,33 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));    
 
-const dbconnect = mysql.createConnection({
+/*const dbconnect = mysql.createConnection({
     host: 'mysql-instance1.cw9kedhiiosc.us-east-1.rds.amazonaws.com',
     user: 'niravyas_ediss',
     password: 'edissrox',
     database: 'EDISS'
+});*/
+
+
+//mysql connection
+var dbconnect = mysql.createPool({
+	connectionLimit: 500,
+	//host: 'edissdb.cf94n1xe54ku.us-east-1.rds.amazonaws.com',
+	host: 'mysql-instance1.cw9kedhiiosc.us-east-1.rds.amazonaws.com',
+	port: '3306',
+	user: 'niravyas_ediss',
+	password: 'edissrox',
+	database: 'EDISS'
 });
 
-
 // connect to database
-dbconnect.connect();
+//dbconnect.connect();
 
 // Login function
 app.post('/login', function (req, res) {
     var parameters  = [req.body.username, req.body.password]
-    dbconnect.query('SELECT * FROM users where username=? and  password=?', parameters, function (err, results, fields) {
+    dbconnect.getConnection(function(err,connection){
+    connection.query('SELECT * FROM users where username=? and  password=?', parameters, function (err, results, fields) {
         if (err) dbconnect.end;
         
         else if(!err && results.length>0){
@@ -55,6 +67,7 @@ app.post('/login', function (req, res) {
         }   
         
     });
+        });
 });
 
 
