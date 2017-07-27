@@ -312,7 +312,7 @@ app.post('/viewProducts', function (req, res) {
         if(group) { query1 += "  match(`group`) against ("+ connection.escape(req.body.group) +" IN NATURAL LANGUAGE MODE) or"; }
         if(keyword) { query1+=  " match(productName,productDescription) against ("+ connection.escape(req.body.keyword) +" IN NATURAL LANGUAGE MODE) or"; }
         
-        query1 = querystring.slice(0,-2);
+        query1 = query1.slice(0,-2);
         query1 += 'limit 1000;';
         
         console.log(query1);
