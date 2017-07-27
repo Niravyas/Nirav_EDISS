@@ -65,7 +65,7 @@ app.post('/login', function (req, res) {
         else{
          res.json({ 'message': 'There seems to be an issue with the username/password combination that you entered' });
         }   
-        
+        connection.release();
     });
         });
 });
@@ -92,7 +92,8 @@ app.post('/registerUser', function (req, res) {
         }
     
     else{
-        dbconnect.query('SELECT * FROM users where username=?', req.body.username, function (err, results, fields) {
+        dbconnect.getConnection(function(err,connection){
+        connection.query('SELECT * FROM users where username=?', req.body.username, function (err, results, fields) {
         if (err) dbconnect.end;
         
         else if(!err && results.length>0){
@@ -102,13 +103,15 @@ app.post('/registerUser', function (req, res) {
         else if(!err && 0 == results.length){
             var parameters  = [req.body.fname, req.body.lname, req.body.address, req.body.city, req.body.state, req.body.zip, req.body.email, req.body.username, req.body.password];
             
-        dbconnect.query("INSERT INTO users (`fname`, `lname`, `address`, `city`, `state`, `zip`, `email`, `username`, `password`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", parameters, function (error, results, fields) {
+        connection.query("INSERT INTO users (`fname`, `lname`, `address`, `city`, `state`, `zip`, `email`, `username`, `password`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", parameters, function (error, results, fields) {
         if (error) throw error;
         res.json({ 'message': req.body.fname+' was registered successfully'});
     });
 
         }
     });
+            connection.release();
+ });
     }
 });
 
@@ -122,14 +125,15 @@ app.post('/addProducts', function (req, res) {
         }
     else{
         //check whether user is an admin
-        dbconnect.query('SELECT * FROM admins where username=?', req.session.username, function (err1, results1, fields1) {
+        dbconnect.getConnection(function(err,connection){
+        connection.query('SELECT * FROM admins where username=?', req.session.username, function (err1, results1, fields1) {
         if (err1) dbconnect.end;
         //console.log("Coming here"+req.session.username);
         else if(results1.length>0){
            // console.log("Coming here2"+req.session.username+" "+results1.length);
            //add product if not a duplicate
             var parameters  = [req.body.asin, req.body.productName, req.body.productDescription, req.body.group]
-             dbconnect.query('INSERT INTO products (`asin`, `productname`, `productdescription`, `group`) VALUES (?, ?, ?, ?)', parameters, function (err3, results3, fields3) {
+             connection.query('INSERT INTO products (`asin`, `productname`, `productdescription`, `group`) VALUES (?, ?, ?, ?)', parameters, function (err3, results3, fields3) {
                  
         if (err3){ 
             res.json({ 'message': 'The input you provided is not valid' });
@@ -150,6 +154,8 @@ app.post('/addProducts', function (req, res) {
         }   
         
     });
+            connection.release();
+            });
         
     }
   
@@ -165,14 +171,15 @@ app.post('/modifyProduct', function (req, res) {
         }
     else{
         //check whether user is an admin
-        dbconnect.query('SELECT * FROM admins where username=?', req.session.username, function (err1, results1, fields1) {
+        dbconnect.getConnection(function(err,connection){
+        connection.query('SELECT * FROM admins where username=?', req.session.username, function (err1, results1, fields1) {
         console.log("Session user:"+req.session.username);
         if (err1) dbconnect.end;
         
         else if(!err1 && results1.length>0){
            //add product if not a duplicate
             var parameters  = [req.body.productName, req.body.productDescription, req.body.group, req.body.asin]
-             dbconnect.query('UPDATE products SET `productname`=?, `productdescription`=?, `group`=? where `asin`=?', parameters, function (err3, results3, fields3) {
+             connection.query('UPDATE products SET `productname`=?, `productdescription`=?, `group`=? where `asin`=?', parameters, function (err3, results3, fields3) {
                  
         if (err3){ 
             res.json({ 'message': 'The input you provided is not valid' });
@@ -194,6 +201,8 @@ app.post('/modifyProduct', function (req, res) {
         }   
         
     });
+            connection.release();
+        });
         
     }
   
@@ -205,13 +214,14 @@ app.post('/viewUsers', function (req, res) {
         } 
     else{
         //check whether user is an admin
-        dbconnect.query('SELECT * FROM admins where username=?', req.session.username, function (err1, results1, fields1) {
+        dbconnect.getConnection(function(err,connection){
+        connection.query('SELECT * FROM admins where username=?', req.session.username, function (err1, results1, fields1) {
         if (err1) dbconnect.end;
         
         else if(!err1 && results1.length>0){
           if((req.body.fname) && !(req.body.lname)){
               //search using first name
-              dbconnect.query('SELECT fname, lname, username as userId FROM users where fname=?', req.body.fname, function (err2, results2, fields2) {
+              connection.query('SELECT fname, lname, username as userId FROM users where fname=?', req.body.fname, function (err2, results2, fields2) {
                     if (err2){console.log(err2); dbconnect.end;}
                     else if(results2.length == 0){
                         res.json({ 'message': 'There are no users that match that criteria' });
@@ -224,7 +234,7 @@ app.post('/viewUsers', function (req, res) {
            else if(!(req.body.fname) && (req.body.lname)){
                //searchusing last name
                
-                dbconnect.query('SELECT fname, lname, username as userId FROM users where lname=?', req.body.lname, function (err2, results2, fields2) {
+                connection.query('SELECT fname, lname, username as userId FROM users where lname=?', req.body.lname, function (err2, results2, fields2) {
                     if (err2) dbconnect.end;
                     else if(results2.length == 0){
                         res.json({ 'message': 'There are no users that match that criteria' });
@@ -237,7 +247,7 @@ app.post('/viewUsers', function (req, res) {
             else if((req.body.fname) && (req.body.lname)){
                 //search using both names
                 var parameters = [req.body.fname, req.body.lname]
-                dbconnect.query('SELECT fname, lname, username as userId  FROM users where fname=? and lname=?', parameters, function (err2, results2, fields2) {
+                connection.query('SELECT fname, lname, username as userId  FROM users where fname=? and lname=?', parameters, function (err2, results2, fields2) {
                     if (err2) dbconnect.end;
                     else if(results2.length == 0){
                         res.json({ 'message': 'There are no users that match that criteria' });
@@ -249,7 +259,7 @@ app.post('/viewUsers', function (req, res) {
             }
             else{
                 //search using no filter
-                dbconnect.query('SELECT fname, lname, username as userId FROM users', function (err3, results3, fields3) {
+                connection.query('SELECT fname, lname, username as userId FROM users', function (err3, results3, fields3) {
                     if (err3) dbconnect.end;
                     else if(results3.length == 0){
                         res.json({ 'message': 'There are no users that match that criteria' });
@@ -266,6 +276,8 @@ app.post('/viewUsers', function (req, res) {
         }   
         
     });
+            connection.release();
+        });
         
     }
   
@@ -278,7 +290,8 @@ app.post('/viewProducts', function (req, res) {
         var query1 = "SELECT `asin`, `productName` from `products`"
         
         if(!req.body.asin && !req.body.keyword && !req.body.group){
-            dbconnect.query(query1, function (err, results, fields) {
+            dbconnect.getConnection(function(err,connection){
+            connection.query(query1, function (err, results, fields) {
                     if (err) dbconnect.end;
                     else if(results.length == 0){
                         res.json({ 'message': 'There are no products that match that criteria' });
@@ -287,6 +300,7 @@ app.post('/viewProducts', function (req, res) {
                         res.json({ 'message': 'The action was successful', 'product':results});
                     }
                      });
+            });
         }
         
      else{   
@@ -325,7 +339,8 @@ app.post('/viewProducts', function (req, res) {
         }
     
     console.log(query1);
-    dbconnect.query(query1, function (err, results, fields) {
+         dbconnect.getConnection(function(err,connection){
+    connection.query(query1, function (err, results, fields) {
                     if (err) dbconnect.end;
                     else if(results.length == 0){
                         res.json({ 'message': 'There are no products that match that criteria' });
@@ -334,6 +349,8 @@ app.post('/viewProducts', function (req, res) {
                         res.json({ 'message': 'The action was successful', 'product':results});
                     }
                      });
+             connection.release();
+         });
          
      }
   });
@@ -429,9 +446,9 @@ app.post('/updateInfo', function (req, res) {
    
     
    
+    dbconnect.getConnection(function(err,connection){
     
-    
-    dbconnect.query('SELECT * FROM `admins` where `username`=?', req.session.username, function (err1, results1, fields1) {
+    connection.query('SELECT * FROM `admins` where `username`=?', req.session.username, function (err1, results1, fields1) {
         if (err1) dbconnect.end;
         
         else if(!err1 && results1.length>0){
@@ -445,6 +462,8 @@ app.post('/updateInfo', function (req, res) {
             console.log("Made admin d true"+admin_status);
         }
         });
+        connection.release();
+    });
    //changing sessions
      if(req.body.username){
         req.session.username = req.body.username;
@@ -452,6 +471,7 @@ app.post('/updateInfo', function (req, res) {
     }
      
     //finally update users table
+       dbconnect.getConnection(function(err,connection){
     dbconnect.query(query1, function (err1, results1, fields1) {
     if(err1){ 
         res.json({ 'message': 'The input you provided is not valid'});
@@ -473,6 +493,8 @@ app.post('/updateInfo', function (req, res) {
             
         }
         });
+           connection.release();
+       });
    }
     
   });
@@ -502,8 +524,8 @@ app.post('/buyProducts', function (req, res) {
             totalNumOfAsins++;
         }
         var SetOfParams = [values, totalNumOfAsins];
-        
-        dbconnect.query("SELECT verifyAsins(?, ?) as isAsinValid", SetOfParams, function (error, results, fields){
+        dbconnect.getConnection(function(err,connection){
+        connection.query("SELECT verifyAsins(?, ?) as isAsinValid", SetOfParams, function (error, results, fields){
             var object;
             
             if(error){
@@ -521,7 +543,7 @@ app.post('/buyProducts', function (req, res) {
         }
             for(var i=0; i<parameters.length; i++){
             var currentAsin = arrOfProducts[i];
-           dbconnect.query('insert into purchasedproducts values (?,?)',[req.session.username,currentAsin],function(err,results){
+           connection.query('insert into purchasedproducts values (?,?)',[req.session.username,currentAsin],function(err,results){
             //not the end, keep it for testing   
 		   /*return res.json({'message':'The action was successful'});*/
 			if(err)
@@ -546,14 +568,14 @@ app.post('/buyProducts', function (req, res) {
              
 if(temp){
   console.log("I am here1");
-dbconnect.query('insert into productrecommendations values (?,?)',[arrOfProducts[i],arrOfProducts[j]],function(err,results){
+connection.query('insert into productrecommendations values (?,?)',[arrOfProducts[i],arrOfProducts[j]],function(err,results){
   if(err)
  { console.log(err);
  isResult = false;
   }
 });	
     console.log("I am here1");
-    dbconnect.query('insert into productrecommendations values (?,?)',[arrOfProducts[j],arrOfProducts[i]],function(err,results){
+    connection.query('insert into productrecommendations values (?,?)',[arrOfProducts[j],arrOfProducts[i]],function(err,results){
  if(err)
 {
  console.log(err);
@@ -579,6 +601,8 @@ if(isResult)
         }
             }
         });
+            connection.release();
+        });
     }
   });
 
@@ -588,7 +612,8 @@ app.post('/productsPurchased', function (req, res) {
         } 
 else{
     //check whether user is an admin
-        dbconnect.query('SELECT * FROM admins where username=?', req.session.username, function (err1, results1, fields1) {
+    dbconnect.getConnection(function(err,connection){
+        connection.query('SELECT * FROM admins where username=?', req.session.username, function (err1, results1, fields1) {
         if(err1){
             throw err1;
         }
@@ -611,6 +636,8 @@ else{
          res.json({ 'message': 'You must be an admin to perform this action' });
         }
              });
+        connection.release();
+    });
     
 }
 });
@@ -618,19 +645,22 @@ else{
 app.post('/getRecommendations', function (req, res) {
   
     var asin = req.body.asin;
-    dbconnect.query("SELECT * from productrecommendations where asin1=?", req.body.asin, function(err,rows){
+    dbconnect.getConnection(function(err,connection){
+    connection.query("SELECT * from productrecommendations where asin1=?", req.body.asin, function(err,rows){
       if (err || rows.length<=0)
 	{
 	   res.json({'message':'There are no recommendations for that product'});
 	}  
         else
 	{
-	    dbconnect.query('select asin from ( select asin2 as asin , count(*) as countOfProd from productrecommendations where asin1=? group by asin2 order by countOfProd desc limit 5  ) as temp',[asin],function(err, rows){
+	    connection.query('select asin from ( select asin2 as asin , count(*) as countOfProd from productrecommendations where asin1=? group by asin2 order by countOfProd desc limit 5  ) as temp',[asin],function(err, rows){
 			res.json({'message':'The action was successful', 'products':rows});
 		 });
          
 	}
         
+    });
+        connection.release();
     });
     
 
