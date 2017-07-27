@@ -23,6 +23,10 @@
  "productdescription": "myprod",
  "group": "Toy"}
 
+{"asin": "5001",
+ "keyword":"abcprod",
+ "group": "Toy"}
+
 {"fname":"niravyas", 
 "lname":"niravyas"
 }

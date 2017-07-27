@@ -286,10 +286,11 @@ app.post('/viewUsers', function (req, res) {
 
 app.post('/viewProducts', function (req, res) {
     
-
-        var query1 = "SELECT `asin`, `productName` from `products`"
-        
-        if(!req.body.asin && !req.body.keyword && !req.body.group){
+    var query1 = "SELECT `asin`, `productName` from `products` limit 1000"
+    var asin = req.body.asin;
+    var keyword = req.body.keyword;
+    var group = req.body.group;
+    if(!req.body.asin && !req.body.keyword && !req.body.group){
             dbconnect.getConnection(function(err,connection){
             connection.query(query1, function (err, results, fields) {
                     if (err) dbconnect.end;
@@ -302,10 +303,39 @@ app.post('/viewProducts', function (req, res) {
                      });
             });
         }
+    else{
+        dbconnect.getConnection(function(err,connection){
+        query1 = "SELECT asin, productName from productdata where";
+        
+        
+        if(asin){query1+=" asin ="+connection.escape(req.body.asin)+ " or";}
+        if(group) { query1 += "  match(`group`) against ("+ connection.escape(req.body.group) +" IN NATURAL LANGUAGE MODE) or"; }
+        if(keyword) { query1+=  " match(productName,productDescription) against ("+ connection.escape(req.body.keyword) +" IN NATURAL LANGUAGE MODE) or"; }
+        
+        querystring = querystring.slice(0,-2);
+        querystring += 'limit 1000;';
+        
+        console.log(query1);
+        
+        
+    connection.query(query1, function (err, results, fields) {
+                    if (err) dbconnect.end;
+                    else if(results.length == 0){
+                        res.json({ 'message': 'There are no products that match that criteria' });
+                    }
+                    else{
+                        res.json({ 'message': 'The action was successful', 'product':results});
+                    }
+                     });
+             connection.release();
+         });
+    
+    }
+       /* 
         
      else{   
         if(req.body.asin || req.body.keyword || req .body.group){
-            query1 = query1.concat("  where");
+            query1 = query1.concat("  where match(");
         }
         
         if(req.body.asin){
@@ -352,7 +382,7 @@ app.post('/viewProducts', function (req, res) {
              connection.release();
          });
          
-     }
+     }*/
   });
 
 app.post('/updateInfo', function (req, res) {
