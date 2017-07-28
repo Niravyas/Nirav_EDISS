@@ -315,7 +315,7 @@ app.post('/viewProducts', function (req, res) {
         }
     else{
         dbconnect.getConnection(function(err,connection){
-        query1 = "SELECT asin, productName from products as product where";
+        query1 = "SELECT asin, productName from products where";
         
         
         if(asin){query1+=" asin ="+connection.escape(req.body.asin)+ " or";}
@@ -672,7 +672,7 @@ else{
         }
             
     else if(!err1 && results1.length>0){
-        var uname = "SELECT asinas productNAme, count(asin) as quantity from purchasedproducts where username='"+req.body.username+"' group by asin" 
+        var uname = "SELECT asin as productName, count(asin) as quantity from purchasedproducts where username='"+req.body.username+"' group by asin" 
      dbconnect.query(uname, function(err2, rows){
          if (err2 || rows.length<=0)
 		        {
