@@ -40,7 +40,7 @@ app.use(bodyParser.urlencoded({
 var dbconnect = mysql.createPool({
 	connectionLimit: 600,
 	//host: 'edissdb.cf94n1xe54ku.us-east-1.rds.amazonaws.com',
-	host: 'mysql-instance1.cw9kedhiiosc.us-east-1.rds.amazonaws.com',
+	host: 'myreadreplica.cw9kedhiiosc.us-east-1.rds.amazonaws.com',
 	port: '3306',
 	user: 'niravyas_ediss',
 	password: 'edissrox',
