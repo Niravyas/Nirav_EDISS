@@ -590,11 +590,7 @@ app.post('/buyProducts', function (req, res) {
                 }
                 else{
                    currentProductName= results1[0].productName;
-                }
-            })    
-                
-                
-                
+                          
            connection.query('insert into purchasedproducts values (?,?)',[req.session.username,currentProductName],function(err,results){
             //not the end, keep it for testing   
 		   /*return res.json({'message':'The action was successful'});*/
@@ -604,7 +600,12 @@ app.post('/buyProducts', function (req, res) {
 			  result_temp = false;
 			  
 		    }
-			});	
+			});
+                }
+            });    
+                
+                
+          	
         }
      console.log("I am here4");        
      for(var i = 0; i<parameters.length - 1; i++){
