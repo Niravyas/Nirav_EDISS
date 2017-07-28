@@ -47,6 +47,16 @@ var dbconnect = mysql.createPool({
 	database: 'EDISS'
 });
 
+var dbwrite = mysql.createPool({
+	connectionLimit: 500,
+	//host: 'edissdb.cf94n1xe54ku.us-east-1.rds.amazonaws.com',
+	host: 'mysql-instance1.cw9kedhiiosc.us-east-1.rds.amazonaws.com',
+	port: '3306',
+	user: 'niravyas_ediss',
+	password: 'edissrox',
+	database: 'EDISS'
+});
+
 // connect to database
 //dbconnect.connect();
 
@@ -92,7 +102,7 @@ app.post('/registerUser', function (req, res) {
         }
     
     else{
-        dbconnect.getConnection(function(err,connection){
+        dbwrite.getConnection(function(err,connection){
         connection.query('SELECT * FROM users where username=?', req.body.username, function (err, results, fields) {
         if (err) dbconnect.end;
         
@@ -125,7 +135,7 @@ app.post('/addProducts', function (req, res) {
         }
     else{
         //check whether user is an admin
-        dbconnect.getConnection(function(err,connection){
+        dbwrite.getConnection(function(err,connection){
         connection.query('SELECT * FROM admins where username=?', req.session.username, function (err1, results1, fields1) {
         if (err1) dbconnect.end;
         //console.log("Coming here"+req.session.username);
@@ -171,7 +181,7 @@ app.post('/modifyProduct', function (req, res) {
         }
     else{
         //check whether user is an admin
-        dbconnect.getConnection(function(err,connection){
+        dbwrite.getConnection(function(err,connection){
         connection.query('SELECT * FROM admins where username=?', req.session.username, function (err1, results1, fields1) {
         console.log("Session user:"+req.session.username);
         if (err1) dbconnect.end;
@@ -476,7 +486,7 @@ app.post('/updateInfo', function (req, res) {
    
     
    
-    dbconnect.getConnection(function(err,connection){
+    dbwrite.getConnection(function(err,connection){
     
     connection.query('SELECT * FROM `admins` where `username`=?', req.session.username, function (err1, results1, fields1) {
         if (err1) dbconnect.end;
@@ -554,7 +564,7 @@ app.post('/buyProducts', function (req, res) {
             totalNumOfAsins++;
         }
         var SetOfParams = [values, totalNumOfAsins];
-        dbconnect.getConnection(function(err,connection){
+        dbwrite.getConnection(function(err,connection){
         connection.query("SELECT verifyAsins(?, ?) as isAsinValid", SetOfParams, function (error, results, fields){
             var object;
             
