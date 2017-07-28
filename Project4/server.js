@@ -681,7 +681,7 @@ else{
 				
 				else
 				{//query product table using asin to get productname
-                    console.log("SELECT asin, count(asin) as quantity from purchasedproducts where username="+req.body.username+" group by asin");
+                    console.log(uname);
 					res.json({'message':'The action was successful', 'products':rows});
 				}
      });   
