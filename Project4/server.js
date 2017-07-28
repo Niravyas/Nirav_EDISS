@@ -670,6 +670,7 @@ else{
         if(err1){
             throw err1;
         }
+            
     else if(!err1 && results1.length>0){
      dbconnect.query("SELECT asin, count(asin) as quantity from purchasedproducts where username=? group by asin", req.body.username, function(err2, rows){
          if (err2 || rows.length<=0)
@@ -678,7 +679,8 @@ else{
 		        }
 				
 				else
-				{//query product table using asin to get productname 
+				{//query product table using asin to get productname
+                    console.log("SELECT asin, count(asin) as quantity from purchasedproducts where username="+req.body.username+" group by asin");
 					res.json({'message':'The action was successful', 'products':rows});
 				}
      });   
