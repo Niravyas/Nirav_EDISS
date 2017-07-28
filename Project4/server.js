@@ -672,7 +672,8 @@ else{
         }
             
     else if(!err1 && results1.length>0){
-     dbconnect.query("SELECT asin, count(asin) as quantity from purchasedproducts where username=? group by asin", [req.body.username], function(err2, rows){
+        var uname = '/'' + req.body.username + '/'';
+     dbconnect.query("SELECT asin, count(asin) as quantity from purchasedproducts where username=? group by asin", uname, function(err2, rows){
          if (err2 || rows.length<=0)
 		        {
 			      res.json({'message':'There are no users that match that criteria'});
