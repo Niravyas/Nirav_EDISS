@@ -315,7 +315,7 @@ app.post('/viewProducts', function (req, res) {
         }
     else{
         dbconnect.getConnection(function(err,connection){
-        query1 = "SELECT asin, productName from products where";
+        query1 = "SELECT asin, productName from products as product where";
         
         
         if(asin){query1+=" asin ="+connection.escape(req.body.asin)+ " or";}
