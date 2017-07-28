@@ -296,7 +296,7 @@ app.post('/viewUsers', function (req, res) {
 
 app.post('/viewProducts', function (req, res) {
     
-    var query1 = "SELECT `asin`, `productName` from `products` limit 1000"
+    var query1 = "SELECT `asin`, `productName` from `products` as `product` limit 1000"
     var asin = req.body.asin;
     var keyword = req.body.keyword;
     var group = req.body.group;
