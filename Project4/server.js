@@ -672,7 +672,7 @@ else{
         }
             
     else if(!err1 && results1.length>0){
-        var uname = "SELECT asin, count(asin) as quantity from purchasedproducts where username='"+req.body.username+"' group by asin" 
+        var uname = "SELECT asinas productNAme, count(asin) as quantity from purchasedproducts where username='"+req.body.username+"' group by asin" 
      dbconnect.query(uname, function(err2, rows){
          if (err2 || rows.length<=0)
 		        {
