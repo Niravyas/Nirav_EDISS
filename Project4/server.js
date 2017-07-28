@@ -583,7 +583,19 @@ app.post('/buyProducts', function (req, res) {
         }
             for(var i=0; i<parameters.length; i++){
             var currentAsin = arrOfProducts[i];
-           connection.query('insert into purchasedproducts values (?,?)',[req.session.username,currentAsin],function(err,results){
+                var currentProductName ='';
+            connection.query('select productName from products where asin=?', [currentAsin], function(err1, results1){
+                if(err1){
+                    //errorcode
+                }
+                else{
+                   currentProductName= results1[0].productName;
+                }
+            })    
+                
+                
+                
+           connection.query('insert into purchasedproducts values (?,?)',[req.session.username,currentProductName],function(err,results){
             //not the end, keep it for testing   
 		   /*return res.json({'message':'The action was successful'});*/
 			if(err)
@@ -658,14 +670,14 @@ else{
             throw err1;
         }
     else if(!err1 && results1.length>0){
-     dbconnect.query("SELECT productName, count(productName) as quantity from purchasedproducts where username=? group by productName", req.body.username, function(err2, rows){
+     dbconnect.query("SELECT productName, count(productName) as quantity from purchasedproducts where username=? group by asin", req.body.username, function(err2, rows){
          if (err2 || rows.length<=0)
 		        {
 			      res.json({'message':'There are no users that match that criteria'});
 		        }
 				
 				else
-				{
+				{//query product table using asin to get productname 
 					res.json({'message':'The action was successful', 'products':rows});
 				}
      });   
