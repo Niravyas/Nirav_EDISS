@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({
 
 //mysql connection
 var dbconnect = mysql.createPool({
-	connectionLimit: 500,
+	connectionLimit: 600,
 	//host: 'edissdb.cf94n1xe54ku.us-east-1.rds.amazonaws.com',
 	host: 'mysql-instance1.cw9kedhiiosc.us-east-1.rds.amazonaws.com',
 	port: '3306',
@@ -48,7 +48,7 @@ var dbconnect = mysql.createPool({
 });
 
 var dbwrite = mysql.createPool({
-	connectionLimit: 500,
+	connectionLimit: 600,
 	//host: 'edissdb.cf94n1xe54ku.us-east-1.rds.amazonaws.com',
 	host: 'mysql-instance1.cw9kedhiiosc.us-east-1.rds.amazonaws.com',
 	port: '3306',
