@@ -296,7 +296,63 @@ app.post('/viewUsers', function (req, res) {
 
 app.post('/viewProducts', function (req, res) {
     
-    var query1 = "SELECT `asin`, `productName` from `products` as `product` limit 1000"
+    var params =[req.body.asin,req.body.keyword,req.body.group];
+	var asin= req.body.asin;
+	var keyword= req.body.keyword;
+	var group = req.body.group;
+	var qString ;
+    if(keyword)  
+    {
+    if(asin && group)
+    qString="SELECT * from ((SELECT asin,productName,productDescription,`group` from products where productName like '%" + keyword + "%' or productDescription like '%" + keyword + "%') as innertable) where asin='" + asin + "' and `group` like '%" + group + "%'";
+	else if(!asin && group)
+    qString="SELECT * from ((SELECT asin,productName,productDescription,`group` from products where productName like '%" + keyword + "%' or productDescription like '%" + keyword + "%') as innertable) where `group` like '%" + group + "%'";
+    else if(!asin && !group)
+    qString="SELECT * from ((SELECT asin,productName,productDescription,`group` from products where productName like '%" + keyword + "%' or productDescription like '%" + keyword + "%') as innertable)";
+    else if(asin && !group)
+    qString="SELECT * from ((SELECT asin,productName,productDescription,`group` from products where productName like '%" + keyword + "%' or productDescription like '%" + keyword +  "%') as innertable) where asin='"+ asin +"'";
+} 
+    else
+{
+    if(asin && !group)
+    qString="SELECT * from products where asin='"+asin+"'";
+    else if(group && !asin)
+    qString="SELECT * from products where `group` like '%"+group+"%'";
+    else if(asin && group)
+    qString="SELECT * from products where asin='"+asin+"' and `group` like '%"+group+"%'";
+	else{
+	qString = "SELECT * from products ";
+	}
+}
+    
+    console.log(queryString);
+	dbconnect.getConnection(function(err, connection) {
+		
+	connection.query(qString, function(err, rows, fields) {
+		
+   if (!err && rows.length > 0 )
+    {    
+          var obj= '{"message":"The action was successful","product":[';    
+          var result = [];
+          for(var i =0; i< rows.length; i++)
+          {
+              var temp= '{"asin":"'+rows[i].asin+'","productName":"'+rows[i].productName+'"}';
+              result.push(temp);
+          }
+          obj=obj+ result +']}';
+          return res.send(obj);
+    }  
+         else          
+    {       
+    
+      var obj= '{"message":"There are no products that match that criteria"}';
+      return res.send(obj);  
+	} 
+ });
+        });
+
+    
+    /*var query1 = "SELECT `asin`, `productName` from `products` as `product` limit 1000"
     var asin = req.body.asin;
     var keyword = req.body.keyword;
     var group = req.body.group;
@@ -340,7 +396,9 @@ app.post('/viewProducts', function (req, res) {
              connection.release();
          });
     
-    }
+    }*/
+    
+    //my old code
        /* 
         
      else{   
