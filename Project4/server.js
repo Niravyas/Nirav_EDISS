@@ -340,7 +340,7 @@ app.post('/viewProducts', function (req, res) {
               result.push(temp);
           }
           obj=obj+ result +']}';
-          res.send(obj);
+          return res.send(obj);
     }  
          else          
     {       
@@ -349,8 +349,9 @@ app.post('/viewProducts', function (req, res) {
       return res.send(obj);  
 	} 
  });
+        connection.release();
         });
-     connection.release();
+     
 
     
     /*var query1 = "SELECT `asin`, `productName` from `products` as `product` limit 1000"
