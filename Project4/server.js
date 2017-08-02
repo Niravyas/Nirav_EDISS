@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({
 
 //mysql connection
 var dbconnect = mysql.createPool({
-	connectionLimit: 1000,
+	connectionLimit: 500,
 	//host: 'edissdb.cf94n1xe54ku.us-east-1.rds.amazonaws.com',
 	host: 'mysql-instance1.cw9kedhiiosc.us-east-1.rds.amazonaws.com',
 	port: '3306',
@@ -75,8 +75,9 @@ app.post('/login', function (req, res) {
         else{
          res.json({ 'message': 'There seems to be an issue with the username/password combination that you entered' });
         }   
-        connection.release();
+        
     });
+        connection.release();
         });
 });
 
@@ -162,9 +163,9 @@ app.post('/addProducts', function (req, res) {
         else{
          res.json({ 'message': 'You must be an admin to perform this action' });
         }   
-        connection.release();
+        
     });
-            
+            connection.release();
             });
         
     }
@@ -209,9 +210,9 @@ app.post('/modifyProduct', function (req, res) {
         else{
          res.json({ 'message': 'You must be an admin to perform this action' });
         }   
-        connection.release();
+        
     });
-            
+            connection.release();
         });
         
     }
@@ -284,9 +285,9 @@ app.post('/viewUsers', function (req, res) {
         else{
          res.json({ 'message': 'You must be an admin to perform this action' });
         }   
-        connection.release();
+        
     });
-            
+            connection.release();
         });
         
     }
@@ -348,9 +349,8 @@ app.post('/viewProducts', function (req, res) {
       var obj= '{"message":"There are no products that match that criteria"}';
       return res.send(obj);  
 	} 
-        connection.release();
  });
-       
+        connection.release();
         });
      
 
@@ -562,9 +562,8 @@ app.post('/updateInfo', function (req, res) {
         });
             console.log("Made admin d true"+admin_status);
         }
-        connection.release();
         });
-        
+        connection.release();
     });
    //changing sessions
      if(req.body.username){
@@ -590,13 +589,12 @@ app.post('/updateInfo', function (req, res) {
             console.log(firstName);
             res.json({ 'message': firstName + ' your information was successfully updated'});
         }
-        connection.release();
         });
     
             
         }
         });
-           
+           connection.release();
        });
    }
     
@@ -716,9 +714,8 @@ if(isResult)
             
         }
             }
-            connection.release();
         });
-           
+            connection.release();
         });
     }
   });
@@ -755,9 +752,8 @@ else{
         else{
          res.json({ 'message': 'You must be an admin to perform this action' });
         }
-            connection.release();
              });
-        
+        connection.release();
     });
     
 }
@@ -779,9 +775,9 @@ app.post('/getRecommendations', function (req, res) {
 		 });
          
 	}
-        connection.release();
+        
     });
-       
+        connection.release();
     });
     
 
@@ -790,7 +786,7 @@ app.post('/getRecommendations', function (req, res) {
 
 // port must 4000
 app.listen(4000, function () {
-    console.log('niravkav Project 2 app is running on port 4000');
+    console.log('niravkav Project 4 app is running on port 4000');
 });
  
 
