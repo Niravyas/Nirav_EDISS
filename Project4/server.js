@@ -350,6 +350,7 @@ app.post('/viewProducts', function (req, res) {
 	} 
  });
         });
+     connection.release();
 
     
     /*var query1 = "SELECT `asin`, `productName` from `products` as `product` limit 1000"
