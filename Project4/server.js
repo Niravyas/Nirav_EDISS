@@ -325,7 +325,7 @@ app.post('/viewProducts', function (req, res) {
 	}
 }
     
-    console.log(queryString);
+    console.log(qString);
 	dbconnect.getConnection(function(err, connection) {
 		
 	connection.query(qString, function(err, rows, fields) {
