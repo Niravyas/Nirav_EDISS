@@ -297,12 +297,7 @@ app.post('/viewUsers', function (req, res) {
 
 app.post('/viewProducts', function (req, res) {
     
-    var params =[req.body.asin,req.body.keyword,req.body.group];
-	var asin= req.body.asin;
-	var keyword= req.body.keyword;
-	var group = req.body.group;
-	var qString ;
-    if(keyword)  
+       /*if(keyword)  
     {
     if(asin && group)
     qString="SELECT * from ((SELECT asin,productName,productDescription,`group` from products where productName like '%" + keyword + "%' or productDescription like '%" + keyword + "%') as innertable) where asin='" + asin + "' and `group` like '%" + group + "%'";
@@ -351,11 +346,12 @@ app.post('/viewProducts', function (req, res) {
 	} 
  });
         connection.release();
-        });
+        });*/
      
 
     
-    /*var query1 = "SELECT `asin`, `productName` from `products` as `product` limit 1000"
+   // var query1 = "select asin,productName from productdata_read where MATCH(productName,productDescription) AGAINST ('\""+keyword+"\"' IN BOOLEAN MODE)"
+    var query1 = "select asin, prodName from products limit 1000";
     var asin = req.body.asin;
     var keyword = req.body.keyword;
     var group = req.body.group;
@@ -370,6 +366,7 @@ app.post('/viewProducts', function (req, res) {
                         res.json({ 'message': 'The action was successful', 'product':results});
                     }
                      });
+                connection.release();
             });
         }
     else{
@@ -378,8 +375,9 @@ app.post('/viewProducts', function (req, res) {
         
         
         if(asin){query1+=" asin ="+connection.escape(req.body.asin)+ " or";}
-        if(group) { query1 += "  match(`group`) against ("+ connection.escape(req.body.group) +" IN NATURAL LANGUAGE MODE) or"; }
-        if(keyword) { query1+=  " match(productName,productDescription) against ("+ connection.escape(req.body.keyword) +" IN NATURAL LANGUAGE MODE) or"; }
+        //if(group) { query1 += "  match(`group`) against ("+ connection.escape(req.body.group) +" IN NATURAL LANGUAGE MODE) or"; }
+        if(group){query1+=" `group` ="+connection.escape(req.body.group)+ " or";}
+        if(keyword) { query1+=  " MATCH(productName,productDescription) AGAINST ('\""+connection.escape(req.body.keyword)+"\"' IN BOOLEAN MODE)"; }
         
         query1 = query1.slice(0,-2);
         query1 += 'limit 1000;';
@@ -399,7 +397,7 @@ app.post('/viewProducts', function (req, res) {
              connection.release();
          });
     
-    }*/
+    }
     
     //my old code
        /* 
