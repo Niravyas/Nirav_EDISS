@@ -340,7 +340,7 @@ app.post('/viewProducts', function (req, res) {
               result.push(temp);
           }
           obj=obj+ result +']}';
-          return res.send(obj);
+          res.send(obj);
     }  
          else          
     {       
