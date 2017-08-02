@@ -162,9 +162,9 @@ app.post('/addProducts', function (req, res) {
         else{
          res.json({ 'message': 'You must be an admin to perform this action' });
         }   
-        
+        connection.release();
     });
-            connection.release();
+            
             });
         
     }
@@ -209,9 +209,9 @@ app.post('/modifyProduct', function (req, res) {
         else{
          res.json({ 'message': 'You must be an admin to perform this action' });
         }   
-        
+        connection.release();
     });
-            connection.release();
+            
         });
         
     }
@@ -284,9 +284,9 @@ app.post('/viewUsers', function (req, res) {
         else{
          res.json({ 'message': 'You must be an admin to perform this action' });
         }   
-        
+        connection.release();
     });
-            connection.release();
+            
         });
         
     }
@@ -348,8 +348,9 @@ app.post('/viewProducts', function (req, res) {
       var obj= '{"message":"There are no products that match that criteria"}';
       return res.send(obj);  
 	} 
- });
         connection.release();
+ });
+       
         });
      
 
@@ -561,8 +562,9 @@ app.post('/updateInfo', function (req, res) {
         });
             console.log("Made admin d true"+admin_status);
         }
-        });
         connection.release();
+        });
+        
     });
    //changing sessions
      if(req.body.username){
@@ -588,12 +590,13 @@ app.post('/updateInfo', function (req, res) {
             console.log(firstName);
             res.json({ 'message': firstName + ' your information was successfully updated'});
         }
+        connection.release();
         });
     
             
         }
         });
-           connection.release();
+           
        });
    }
     
@@ -713,8 +716,9 @@ if(isResult)
             
         }
             }
-        });
             connection.release();
+        });
+           
         });
     }
   });
@@ -751,8 +755,9 @@ else{
         else{
          res.json({ 'message': 'You must be an admin to perform this action' });
         }
+            connection.release();
              });
-        connection.release();
+        
     });
     
 }
@@ -774,9 +779,9 @@ app.post('/getRecommendations', function (req, res) {
 		 });
          
 	}
-        
-    });
         connection.release();
+    });
+       
     });
     
 
