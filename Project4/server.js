@@ -373,8 +373,8 @@ app.post('/viewProducts', function (req, res) {
                             for(var j=0; j< arrOfStr.length; j++){
                                 pn = pn + arrOfStr[j];
                             }
-                            console.log(pn);
-                            console.log("hellohellohello");
+                           // console.log(pn);
+                        //    console.log("hellohellohello");
                             var temp= '{"asin":"'+rows[i].asin+'","productName":"'+pn+'"}';
                             console.log(temp);
                             result.push(temp);
