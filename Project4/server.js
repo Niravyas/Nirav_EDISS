@@ -363,25 +363,8 @@ app.post('/viewProducts', function (req, res) {
                         res.json({ 'message': 'There are no products that match that criteria' });
                     }
                     else{
-                        console.log("ITs coming here");
-                        var obj= '{"message":"The action was successful","product":[';    
-                        var result = [];
-                        for(var i =0; i< rows.length; i++)
-                        {
-                            var arrOfStr = rows[i].productName.split(",");
-                            var pn = "";
-                            for(var j=0; j< arrOfStr.length; j++){
-                                pn = pn + arrOfStr[j];
-                            }
-                           // console.log(pn);
-                        //    console.log("hellohellohello");
-                            var temp= '{"asin":"'+rows[i].asin+'","productName":"'+pn+'"}';
-                            console.log(temp);
-                            result.push(temp);
-                        }
-          obj=obj+ result +']}';
-          return res.send(obj);
-                        //res.json({ 'message': 'The action was successful', 'product':results});
+                       
+                        res.json({ 'message': 'The action was successful', 'product':results});
                     }
                      });
                 connection.release();
@@ -421,16 +404,22 @@ app.post('/viewProducts', function (req, res) {
                             for(var j=0; j< arrOfStr.length; j++){
                                 pn = pn + arrOfStr[j];
                                 temp= '{"asin":"'+rows[i].asin+'","productName":"'+pn+'"}';
+                                
+                                if(j == arrOfStr.length - 1){
+                                    result.push(temp);
+                                    obj=obj+ result +']}';
+                                    return res.send(obj);
+                                }
                             }
                             console.log(pn);
                             console.log("hellohellohello");
-                           
+                           //res
                             console.log(temp);
-                            result.push(temp);
+                            
                         }
-          obj=obj+ result +']}';
+          //obj
                         console.log(obj);
-          return res.send(obj);
+          
                         //res.json({ 'message': 'The action was successful', 'product':results});
                     }
                      });
