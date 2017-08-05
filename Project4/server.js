@@ -368,11 +368,12 @@ app.post('/viewProducts', function (req, res) {
                         for(var i =0; i< rows.length; i++)
                         {
                             var arrOfStr = rows[i].productName.split(",");
-                            var productName = ""
+                            var pn = ""
                             for(var j=0; j< arrOfStr.length; j++){
-                                productName = productName + arrOfStr[i];
+                                pn = pn + arrOfStr[i];
                             }
-                            console.log(productName);
+                            console.log(pn);
+                            console.log("hellohellohello");
                             var temp= '{"asin":"'+rows[i].asin+'","productName":"'+rows[i].productName+'"}';
                             result.push(temp);
                         }
