@@ -418,10 +418,11 @@ app.post('/viewProducts', function (req, res) {
                             var pn = "";
                             for(var j=0; j< arrOfStr.length; j++){
                                 pn = pn + arrOfStr[j];
+                                 var temp= '{"asin":"'+rows[i].asin+'","productName":"'+pn+'"}';
                             }
                             console.log(pn);
                             console.log("hellohellohello");
-                            var temp= '{"asin":"'+rows[i].asin+'","productName":"'+pn+'"}';
+                           
                             console.log(temp);
                             result.push(temp);
                         }
