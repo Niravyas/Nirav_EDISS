@@ -370,7 +370,7 @@ app.post('/viewProducts', function (req, res) {
                             var arrOfStr = rows[i].productName.split(",");
                             var pn = ""
                             for(var j=0; j< arrOfStr.length; j++){
-                                pn = pn + arrOfStr[i];
+                                pn = pn + arrOfStr[j];
                             }
                             console.log(pn);
                             console.log("hellohellohello");
