@@ -359,16 +359,17 @@ app.post('/viewProducts', function (req, res) {
             dbconnect.getConnection(function(err,connection){
             connection.query(query1, function (err, rows, fields) {
                     if (err) dbconnect.end;
-                    else if(results.length == 0){
+                    else if(rows.length == 0){
                         res.json({ 'message': 'There are no products that match that criteria' });
                     }
                     else{
+                        console.log("ITs coming here");
                         var obj= '{"message":"The action was successful","product":[';    
                         var result = [];
                         for(var i =0; i< rows.length; i++)
                         {
                             var arrOfStr = rows[i].productName.split(",");
-                            var pn = ""
+                            var pn = "";
                             for(var j=0; j< arrOfStr.length; j++){
                                 pn = pn + arrOfStr[j];
                             }
