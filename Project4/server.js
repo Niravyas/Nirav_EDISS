@@ -426,6 +426,7 @@ app.post('/viewProducts', function (req, res) {
                             result.push(temp);
                         }
           obj=obj+ result +']}';
+                        console.log(obj);
           return res.send(obj);
                         //res.json({ 'message': 'The action was successful', 'product':results});
                     }
