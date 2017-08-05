@@ -363,7 +363,22 @@ app.post('/viewProducts', function (req, res) {
                         res.json({ 'message': 'There are no products that match that criteria' });
                     }
                     else{
-                        res.json({ 'message': 'The action was successful', 'product':results});
+                        var obj= '{"message":"The action was successful","product":[';    
+                        var result = [];
+                        for(var i =0; i< rows.length; i++)
+                        {
+                            var arrOfStr = rows[i].productName.split(",");
+                            var productName = ""
+                            for(var j=0; j< arrOfStr.length; j++){
+                                productName = productName + arrOfStr[i];
+                            }
+                            console.log(productName);
+                            var temp= '{"asin":"'+rows[i].asin+'","productName":"'+rows[i].productName+'"}';
+                            result.push(temp);
+                        }
+          obj=obj+ result +']}';
+          return res.send(obj);
+                        //res.json({ 'message': 'The action was successful', 'product':results});
                     }
                      });
                 connection.release();
