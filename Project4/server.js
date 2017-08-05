@@ -375,7 +375,7 @@ app.post('/viewProducts', function (req, res) {
                             }
                             console.log(pn);
                             console.log("hellohellohello");
-                            var temp= '{"asin":"'+rows[i].asin+'","productName":"'+rows[i].productName+'"}';
+                            var temp= '{"asin":"'+rows[i].asin+'","productName":"'+pn+'"}';
                             result.push(temp);
                         }
           obj=obj+ result +']}';
