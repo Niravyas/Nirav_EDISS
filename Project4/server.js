@@ -357,7 +357,7 @@ app.post('/viewProducts', function (req, res) {
     var group = req.body.group;
     if(!req.body.asin && !req.body.keyword && !req.body.group){
             dbconnect.getConnection(function(err,connection){
-            connection.query(query1, function (err, results, fields) {
+            connection.query(query1, function (err, rows, fields) {
                     if (err) dbconnect.end;
                     else if(results.length == 0){
                         res.json({ 'message': 'There are no products that match that criteria' });
