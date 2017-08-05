@@ -396,29 +396,33 @@ app.post('/viewProducts', function (req, res) {
                         var obj= '{"message":"The action was successful","product":[';    
                         var result = [];
                         
-                        var temp ="";
+                        
                         for(var i =0; i< rows.length; i++)
                         {
                             var arrOfStr = rows[i].productName.split(",");
                             var pn = "";
                             for(var j=0; j< arrOfStr.length; j++){
                                 pn = pn + arrOfStr[j];
-                                temp= '{"asin":"'+rows[i].asin+'","productName":"'+pn+'"}';
+                               
                                 
                                 if(j == arrOfStr.length - 1){
+                                    var temp= '{"asin":"'+rows[i].asin+'","productName":"'+pn+'"}';
+                                    console.log(pn);
+                                    console.log(temp);
                                     result.push(temp);
                                     obj=obj+ result +']}';
+                                    console.log(obj);
                                     return res.send(obj);
                                 }
                             }
-                            console.log(pn);
+                            
                             console.log("hellohellohello");
                            //res
-                            console.log(temp);
+                            
                             
                         }
           //obj
-                        console.log(obj);
+                        
           
                         //res.json({ 'message': 'The action was successful', 'product':results});
                     }
