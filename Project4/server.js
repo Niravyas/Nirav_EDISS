@@ -773,7 +773,7 @@ else{
 				else
 				{//query product table using asin to get productname
                     console.log("ITs coming here");
-                        var obj= '{"message":"The action was successful","product":[';    
+                        var obj= '{"message":"The action was successful","products":[';    
                         var result = [];
                         
                         
