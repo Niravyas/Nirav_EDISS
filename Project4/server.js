@@ -411,7 +411,6 @@ app.post('/viewProducts', function (req, res) {
                                     console.log(temp);
                                     result.push(temp);
                                     obj=obj+ result +']}';
-                                    console.log(obj);
                                     return res.send(obj);
                                 }
                             }
@@ -773,8 +772,33 @@ else{
 				
 				else
 				{//query product table using asin to get productname
-                    console.log(uname);
-					res.json({'message':'The action was successful', 'products':rows});
+                    console.log("ITs coming here");
+                        var obj= '{"message":"The action was successful","products":[';    
+                        var result = [];
+                        
+                        
+                        for(var i =0; i< rows.length; i++)
+                        {
+                            var arrOfStr = rows[i].productName.split(",");
+                            var pn = "";
+                            for(var j=0; j< arrOfStr.length; j++){
+                                pn = pn + arrOfStr[j];
+                               
+                                
+                                if(j == arrOfStr.length - 1){
+                                    var temp= '{"productName":"'+pn+'"}, "quantity":"'+rows[i].quantity+'"';
+                                    console.log(pn);
+                                    console.log(temp);
+                                    result.push(temp);
+                                    obj=obj+ result +']}';
+                                    console.log(obj);
+                                    return res.send(obj);
+                                }
+                            }
+                            
+                            console.log("hellohellohello");
+                   // console.log(uname);
+					//res.json({'message':'The action was successful', 'products':rows});
 				}
      });   
     }
