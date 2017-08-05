@@ -376,6 +376,7 @@ app.post('/viewProducts', function (req, res) {
                             console.log(pn);
                             console.log("hellohellohello");
                             var temp= '{"asin":"'+rows[i].asin+'","productName":"'+pn+'"}';
+                            console.log(temp);
                             result.push(temp);
                         }
           obj=obj+ result +']}';
