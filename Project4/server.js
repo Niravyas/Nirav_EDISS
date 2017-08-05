@@ -402,13 +402,30 @@ app.post('/viewProducts', function (req, res) {
         console.log(query1);
         
         
-    connection.query(query1, function (err, results, fields) {
+    connection.query(query1, function (err, rows, fields) {
                     if (err) dbconnect.end;
                     else if(results.length == 0){
                         res.json({ 'message': 'There are no products that match that criteria' });
                     }
                     else{
-                        res.json({ 'message': 'The action was successful', 'product':results});
+                         console.log("ITs coming here");
+                        var obj= '{"message":"The action was successful","product":[';    
+                        var result = [];
+                        for(var i =0; i< rows.length; i++)
+                        {
+                            var arrOfStr = rows[i].productName.split(",");
+                            var pn = "";
+                            for(var j=0; j< arrOfStr.length; j++){
+                                pn = pn + arrOfStr[j];
+                            }
+                            console.log(pn);
+                            console.log("hellohellohello");
+                            var temp= '{"asin":"'+rows[i].asin+'","productName":"'+pn+'"}';
+                            result.push(temp);
+                        }
+          obj=obj+ result +']}';
+          return res.send(obj);
+                        //res.json({ 'message': 'The action was successful', 'product':results});
                     }
                      });
              connection.release();
