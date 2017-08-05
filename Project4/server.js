@@ -412,13 +412,15 @@ app.post('/viewProducts', function (req, res) {
                          console.log("ITs coming here");
                         var obj= '{"message":"The action was successful","product":[';    
                         var result = [];
+                        var pn = "";
+                        var temp ="";
                         for(var i =0; i< rows.length; i++)
                         {
                             var arrOfStr = rows[i].productName.split(",");
-                            var pn = "";
+                            
                             for(var j=0; j< arrOfStr.length; j++){
                                 pn = pn + arrOfStr[j];
-                                 var temp= '{"asin":"'+rows[i].asin+'","productName":"'+pn+'"}';
+                                temp= '{"asin":"'+rows[i].asin+'","productName":"'+pn+'"}';
                             }
                             console.log(pn);
                             console.log("hellohellohello");
