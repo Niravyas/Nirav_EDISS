@@ -404,7 +404,7 @@ app.post('/viewProducts', function (req, res) {
         
     connection.query(query1, function (err, rows, fields) {
                     if (err) dbconnect.end;
-                    else if(results.length == 0){
+                    else if(rows.length == 0){
                         res.json({ 'message': 'There are no products that match that criteria' });
                     }
                     else{
