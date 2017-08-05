@@ -773,7 +773,7 @@ else{
 				else
 				{//query product table using asin to get productname
                     console.log("ITs coming here");
-                        var obj= '{"message":"The action was successful","products":[';    
+                        var obj= '{"message":"The action was successful","product":[';    
                         var result = [];
                         
                         
@@ -786,17 +786,21 @@ else{
                                
                                 
                                 if(j == arrOfStr.length - 1){
-                                    var temp= '{"productName":"'+pn+'"}, "quantity":"'+rows[i].quantity+'"';
+                                    var temp= '{"productName":"'+pn+'", "quantity":"'+rows[i].quantity+'"}';
                                     console.log(pn);
                                     console.log(temp);
                                     result.push(temp);
                                     obj=obj+ result +']}';
-                                    console.log(obj);
                                     return res.send(obj);
                                 }
                             }
                             
                             console.log("hellohellohello");
+                           //res
+                            
+                            
+                        }
+                    
                    // console.log(uname);
 					//res.json({'message':'The action was successful', 'products':rows});
 				}
